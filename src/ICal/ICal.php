@@ -2176,10 +2176,11 @@ class ICal
      *
      * @param  string|null $rangeStart
      * @param  string|null $rangeEnd
+     * @param  bool $stopOnFirst
      * @return array
      * @throws \Exception
      */
-    public function eventsFromRange($rangeStart = null, $rangeEnd = null)
+    public function eventsFromRange($rangeStart = null, $rangeEnd = null, bool $stopOnFirst = false)
     {
         // Sort events before processing range
         $events = $this->sortEventsWithOrder($this->events());
@@ -2235,6 +2236,10 @@ class ICal
                 )
             ) {
                 $extendedEvents[] = $anEvent;
+
+                if ($stopOnFirst) {
+                    break;
+                }
             }
         }
 
